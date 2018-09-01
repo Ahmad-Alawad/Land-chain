@@ -40,6 +40,9 @@ App = {
    */
   initWeb3: function () {
     // replace me :)
+    App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545');
+    console.log("inside initWeb3");
+    App.initContract();
   },
 
 
@@ -50,7 +53,14 @@ App = {
    */
   initContract: function () {
     $.getJSON('ERC721Token.json', function (data) {
+      // debugger;
       // replace me :)
+      //var contract = require("./truffle-contract");
+      App.contracts = TruffleContract(data);
+      // MyContract.setProvider(app.web3Provider);
+      // App.contracts = MyContract;
+      // console.log(data.abi)
+      App.createContractInstance();
     });
   },
 
@@ -61,6 +71,16 @@ App = {
    */
   createContractInstance() {
     // replace me :)
+    debugger;
+    App.contracts.deployed().then(function(instance){
+      console.log('inside deployeed');
+      debugger;
+     
+    });
+    let instance;
+    App.contractInstance = instance;
+    App.contractInstance.setProvider(App.web3Provider);
+    //Storage.deployed().then(instance => instance.get.call()).then(result => storeData = result)
   },
 
 
